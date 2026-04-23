@@ -10,7 +10,8 @@ Panel informativo que integra datos de APIs públicas para mostrar:
 - Titulares actualizados de La Gaceta (RSS Parseado).
 - Cotización del Dólar Blue en tiempo real (API DolarSi).
 
-**Demo en vivo:** [Enlace a Vercel - Próximamente]
+🚀 Demo en vivo
+👉 [https://tucuman-dashboard.vercel.app](https://tucuman-dashboard.vercel.app)
 
 ## 🛠️ Stack Tecnológico
 - **Framework:** Next.js 14 (App Router).
