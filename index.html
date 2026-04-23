@@ -4,22 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tucumán Dashboard · Clima & Datos</title>
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Fuente Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { font-family: 'Inter', sans-serif; }
-    body { transition: background-color 0.3s ease, color 0.3s ease; margin: 0; }
-    #loginScreen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; background-color: #f9fafb; }
-    .dark #loginScreen { background-color: #111827; }
-    #dashboardScreen { min-height: 100vh; display: flex; }
-    .hidden { display: none !important; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
-    .chart-line { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawLine 1.5s ease-out forwards; }
-    @keyframes drawLine { to { stroke-dashoffset: 0; } }
-    .hover-card { transition: all 0.2s ease; }
-    .hover-card:hover { transform: translateY(-3px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); }
+    * {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    /* Pantallas */
+    #loginScreen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      background-color: #f9fafb;
+    }
+    .dark #loginScreen {
+      background-color: #111827;
+    }
+    #dashboardScreen {
+      min-height: 100vh;
+      display: flex;
+      background-color: #f9fafb;
+    }
+    .dark #dashboardScreen {
+      background-color: #111827;
+    }
+    /* Utilidad para ocultar completamente */
+    .hidden {
+      display: none !important;
+    }
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+    .chart-line {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawLine 1.5s ease-out forwards;
+    }
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
+    .hover-card {
+      transition: all 0.2s ease;
+    }
+    .hover-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
   </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
@@ -57,8 +104,9 @@
   </div>
 </div>
 
-<!-- DASHBOARD PRINCIPAL -->
+<!-- DASHBOARD PRINCIPAL (oculto inicialmente) -->
 <div id="dashboardScreen" class="hidden">
+  <!-- Sidebar -->
   <aside class="w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 p-4 flex flex-col">
     <div class="flex items-center gap-2 mb-8">
       <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
@@ -95,6 +143,8 @@
       </div>
     </div>
   </aside>
+
+  <!-- Contenido Principal -->
   <main class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-900">
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-2xl font-bold">Panel de Control</h1>
@@ -103,6 +153,8 @@
         San Miguel de Tucumán, Argentina
       </div>
     </div>
+
+    <!-- Tarjetas KPIs -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
       <div class="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm hover-card animate-fade-in" style="animation-delay: 0.1s">
         <div class="flex items-center justify-between mb-2">
@@ -129,6 +181,8 @@
         <p class="text-xs text-gray-500 mt-1">Última: hace 25 minutos</p>
       </div>
     </div>
+
+    <!-- Gráfico y Próximos pasos -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm">
         <h3 class="font-semibold mb-3">Tendencia de Temperatura (Últimos 7 días)</h3>
@@ -173,6 +227,7 @@
         </div>
       </div>
     </div>
+
     <div class="mt-6 text-center text-xs text-gray-400">
       Desarrollado por Enzo Avila · Tucumán, Argentina · enzoavila2026@gmail.com
     </div>
@@ -180,21 +235,33 @@
 </div>
 
 <script>
+  // Inicializar iconos en la pantalla de login
   lucide.createIcons();
+
   function login() {
+    // Ocultar login y mostrar dashboard
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboardScreen').classList.remove('hidden');
-    lucide.createIcons();
+    // Actualizar datos dinámicos
     document.getElementById('tempValue').innerText = Math.floor(Math.random() * 5) + 22;
     document.getElementById('dolarValue').innerText = (1245 + Math.floor(Math.random() * 30)).toLocaleString();
     document.getElementById('newsCount').innerText = Math.floor(Math.random() * 8) + 8;
+    // Reinicializar iconos en el dashboard
+    lucide.createIcons();
   }
+
   function toggleDarkMode() {
     document.body.classList.toggle('dark');
     const icon = document.getElementById('darkModeIcon');
-    icon.setAttribute('data-lucide', document.body.classList.contains('dark') ? 'sun' : 'moon');
+    if (document.body.classList.contains('dark')) {
+      icon.setAttribute('data-lucide', 'sun');
+    } else {
+      icon.setAttribute('data-lucide', 'moon');
+    }
     lucide.createIcons();
   }
+
+  // Simular actualizaciones cada 30s
   setInterval(() => {
     if (!document.getElementById('dashboardScreen').classList.contains('hidden')) {
       document.getElementById('tempValue').innerText = Math.floor(Math.random() * 5) + 22;
